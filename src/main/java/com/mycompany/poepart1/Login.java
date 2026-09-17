@@ -83,7 +83,7 @@ public boolean loginUser(String enteredUsername, String enteredPassword){
 
     public String returnLoginStatus(boolean isLoggedIn) {
         if (isLoggedIn){
-            return "elcome" + this.firstName + ", " + this.lastName + "it is great to see you again.";
+            return "Welcome" + this.firstName + ", " + this.lastName + "it is great to see you again.";
         }else {
             return "Username or password incorrect, please try again. ";
             
