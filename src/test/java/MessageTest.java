@@ -12,13 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class MessageTest {
     
-    public MessageTest() {
-        @Test
+  
+    @Test
     public void testCheckMessageLengthSuccess() {
         Message msg = new Message();
         String actual = msg.checkMessageLength("Hi Mike, can you join us for dinner tonight?");
         assertEquals("Message ready to send.", actual);
-    }
-    }
-    
+    }  
 }
