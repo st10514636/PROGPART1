@@ -32,4 +32,17 @@ public class MessageTest {
         String actual = msg.checkRecipientCell("+27718693002");
         assertEquals("Cell phone number successfully captured.", actual);
     }
+    @Test
+    public void testCheckRecipientCellFailure() {
+        Message msg = new Message();
+        String actual = msg.checkRecipientCell("08575975889");
+        assertEquals("Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.", actual);
+    }
+@Test
+    public void testCreateMessageHash() {
+        Message msg = new Message("+27718693002", "Hi Mike, can you join us for dinner tonight?", 0);
+        msg.messageID = "0012345678"; // Set fixed ID for deterministic test
+        String actual = msg.createMessageHash();
+        assertEquals("00:0:HITONIGHT", actual);
+    }
     }
