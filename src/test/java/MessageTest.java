@@ -51,4 +51,10 @@ public class MessageTest {
         msg.messageID = "1234567890";
         assertTrue(msg.checkMessageID());
     }
+    @Test
+    public void testSentMessageSend() {
+        Message msg = new Message();
+        String actual = msg.SentMessage(1);
+        assertEquals("Message successfully sent.", actual);
+    }
     }
