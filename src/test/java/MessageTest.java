@@ -57,4 +57,10 @@ public class MessageTest {
         String actual = msg.SentMessage(1);
         assertEquals("Message successfully sent.", actual);
     }
+    @Test
+    public void testSentMessageDisregard() {
+        Message msg = new Message();
+        String actual = msg.SentMessage(2);
+        assertEquals("Press 0 to delete the message.", actual);
+    }
     }
