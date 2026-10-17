@@ -45,4 +45,10 @@ public class MessageTest {
         String actual = msg.createMessageHash();
         assertEquals("00:0:HITONIGHT", actual);
     }
+    @Test
+    public void testCheckMessageID() {
+        Message msg = new Message();
+        msg.messageID = "1234567890";
+        assertTrue(msg.checkMessageID());
+    }
     }
