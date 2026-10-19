@@ -14,7 +14,7 @@ public class MessageTester {
     
     public MessageTester() {
     }
-    // 1. Test message length success (<= 250 chars)
+   
     @Test
     public void testCheckMessageLengthSuccess() {
         Message msg = new Message();
