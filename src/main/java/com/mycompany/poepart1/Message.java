@@ -8,7 +8,7 @@ import java.util.Random;
  *
  * @author Student
  */
-public class Message {
+public final class Message {
    String messageID;
     String recipientCell;
     String messageText;
