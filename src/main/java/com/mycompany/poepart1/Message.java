@@ -76,16 +76,17 @@ public final class Message {
 
     // Processes user sending choice
     public String SentMessage(int choice) {
-        if (choice == 1) {
-            totalMessagesSent++;
-            return "Message successfully sent.";
-        } else if (choice == 2) {
-            return "Press 0 to delete the message.";
-        } else if (choice == 3) {
-            return "Message successfully stored.";
-        } else {
-            return "Invalid selection.";
-        }
+       switch (choice) {
+           case 1:
+               totalMessagesSent++;
+               return "Message successfully sent.";
+           case 2:
+               return "Press 0 to delete the message.";
+           case 3:
+               return "Message successfully stored.";
+           default:
+               return "Invalid selection.";
+       }
     }
 
     // Formats and returns full message details
