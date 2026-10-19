@@ -4,6 +4,11 @@
  */
 package com.mycompany.poepart1;
 import java.util.Random;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 /**
  *
  * @author Student
@@ -74,7 +79,6 @@ public final class Message {
         return hash;
     }
 
-    // Processes user sending choice
     public String SentMessage(int choice) {
        switch (choice) {
            case 1:
