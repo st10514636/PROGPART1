@@ -79,8 +79,6 @@ public class MessageTester {
         String actual = msg.SentMessage(2);
         assertEquals("Press 0 to delete the message.", actual);
     }
-
-    // 9. Test user selection - Store Message
     @Test
     public void testSentMessageStore() {
         Message msg = new Message();
