@@ -34,7 +34,6 @@ public class Message {
         return this.messageID != null && this.messageID.length() <= 10;
     }
 
-    // Validates recipient cell number (max 10 chars, starts with international code '+')
     public String checkRecipientCell(String cellNumber) {
         if (cellNumber == null || cellNumber.length() > 10 || cellNumber.length() < 2 || cellNumber.charAt(0) != '+') {
             return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
