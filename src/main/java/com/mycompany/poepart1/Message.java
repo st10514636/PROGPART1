@@ -29,7 +29,7 @@ public class Message {
         return String.valueOf(number);
     }
 
-    // Verifies Message ID is not more than 10 characters
+    
     public boolean checkMessageID() {
         return this.messageID != null && this.messageID.length() <= 10;
     }
