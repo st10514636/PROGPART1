@@ -153,15 +153,6 @@ public class Message {
         allSenders[totalTrackedCount] = this.senderName;
         totalTrackedCount++;
     }
-}
-   public void recordInMasterArrays(String hash) {
-        messageHashes[totalTrackedCount] = hash;
-        messageIDs[totalTrackedCount] = this.messageID;
-        allMessages[totalTrackedCount] = this.messageText;
-        allRecipients[totalTrackedCount] = this.recipientCell;
-        allSenders[totalTrackedCount] = this.senderName;
-        totalTrackedCount++;
-    }
     
 
     // Formats and returns full message details
