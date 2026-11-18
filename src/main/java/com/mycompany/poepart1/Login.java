@@ -4,6 +4,7 @@
  */
 package com.mycompany.poepart1;
 import java.util.regex.Pattern;
+import java.util.*;
 import java.util.regex.Matcher;
 /**
  *
@@ -20,7 +21,8 @@ public class Login {
     public Login(){}
     
     public boolean checkUserName(String username){
-        return username != null && username.contains("-") && username.length() <= 5;
+        
+        return username != null && username.contains("_") && username.length() <= 5;
     }
     
     public boolean checkPasswordComplexity(String password) {
@@ -45,14 +47,14 @@ public class Login {
         return hasCapital && hasDigit && hasSpecial;
     }
     public boolean checkCellPhoneNumber(String cellPhoneNumber){
+        this.cellPhoneNumber = cellPhoneNumber;
         if (this.cellPhoneNumber== null){ return false;}
         String cellRegex = "^\\+27[0-9]{9}$";
         return Pattern.matches(cellRegex,this.cellPhoneNumber);
         
     } 
-       
-
-
+    
+   
 
     public String registerUser(String username, String password, String cellPhoneNumber, String firstName, String lastName){
         if (!checkUserName(username)){
@@ -83,7 +85,7 @@ public boolean loginUser(String enteredUsername, String enteredPassword){
 
     public String returnLoginStatus(boolean isLoggedIn) {
         if (isLoggedIn){
-            return "Welcome" + this.firstName + ", " + this.lastName + "it is great to see you again.";
+            return "Welcome " + firstName + ", " + lastName + " it is great to see you again.";
         }else {
             return "Username or password incorrect, please try again. ";
             
