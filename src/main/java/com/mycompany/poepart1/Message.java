@@ -111,18 +111,58 @@ public class Message {
     }
 
     public String SentMessage(int choice) {
-       switch (choice) {
-           case 1:
-               totalMessagesSent++;
-               return "Message successfully sent.";
-           case 2:
-               return "Press 0 to delete the message.";
-           case 3:
-               return "Message successfully stored.";
-           default:
-               return "Invalid selection.";
-       }
+      String currentHash = createMessageHash();
+
+        if (choice == 1) {
+            totalMessagesSent++;
+            sentMessages[sentCount] = this.messageText;
+            sentRecipients[sentCount] = this.recipientCell;
+            sentSenders[sentCount] = this.senderName;
+            sentHashes[sentCount] = currentHash;
+            sentIDs[sentCount] = this.messageID;
+            sentCount++;
+
+            recordInMasterArrays(currentHash);
+            return "Message successfully sent.";
+
+        } else if (choice == 2) {
+            disregardedMessages[disregardedCount] = this.messageText;
+            disregardedCount++;
+            return "Press 0 to delete the message.";
+
+        } else if (choice == 3) {
+            storedMessages[storedCount] = this.messageText;
+            storedRecipients[storedCount] = this.recipientCell;
+            storedSenders[storedCount] = this.senderName;
+            storedHashes[storedCount] = currentHash;
+            storedIDs[storedCount] = this.messageID;
+            storedCount++;
+
+            recordInMasterArrays(currentHash);
+            return storeMessage();
+
+        } else {
+            return "Invalid selection.";
+        }
     }
+        public void recordInMasterArrays(String hash) {
+        messageHashes[totalTrackedCount] = hash;
+        messageIDs[totalTrackedCount] = this.messageID;
+        allMessages[totalTrackedCount] = this.messageText;
+        allRecipients[totalTrackedCount] = this.recipientCell;
+        allSenders[totalTrackedCount] = this.senderName;
+        totalTrackedCount++;
+    }
+}
+   public void recordInMasterArrays(String hash) {
+        messageHashes[totalTrackedCount] = hash;
+        messageIDs[totalTrackedCount] = this.messageID;
+        allMessages[totalTrackedCount] = this.messageText;
+        allRecipients[totalTrackedCount] = this.recipientCell;
+        allSenders[totalTrackedCount] = this.senderName;
+        totalTrackedCount++;
+    }
+    
 
     // Formats and returns full message details
     public String printMessages() {
