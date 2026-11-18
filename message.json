@@ -1,0 +1,17 @@
+[
+  {
+    "messageID": "0012345678",
+    "messageHash": "00:1:HITONIGHT",
+    "recipientCell": "+27685398441",
+    "messageText": "Hi Mike, dinner tonight?",
+    "messageNumber": 1
+  },
+  {
+    "messageID": "0492279687",
+    "messageHash": "04:1:WHERELATE",
+    "recipientCell": "+27838968974",
+    "messageText": "Where are you? You are late!",
+    "messageNumber": 1
+  }
+]
+    
