@@ -22,7 +22,33 @@ public class Message {
     
    File myjson = new File("message.json");
    
-   
+   String senderName = "Developer";
+
+    static String[] sentMessages = new String[50];
+    static String[] sentRecipients = new String[50];
+    static String[] sentSenders = new String[50];
+    static String[] sentHashes = new String[50];
+    static String[] sentIDs = new String[50];
+    static int sentCount = 0;
+
+    static String[] disregardedMessages = new String[50];
+    static int disregardedCount = 0;
+
+    static String[] storedMessages = new String[50];
+    static String[] storedRecipients = new String[50];
+    static String[] storedSenders = new String[50];
+    static String[] storedHashes = new String[50];
+    static String[] storedIDs = new String[50];
+    static int storedCount = 0;
+
+    static String[] messageHashes = new String[50];
+    static String[] messageIDs = new String[50];
+    static String[] allMessages = new String[50];
+    static String[] allRecipients = new String[50];
+    static String[] allSenders = new String[50];
+    static int totalTrackedCount = 0;
+    
+    public Message() {}
     public Message(String recipientCell, String messageText, int messageNumber) {
         this.recipientCell = recipientCell;
         this.messageText = messageText;
@@ -150,3 +176,4 @@ public class Message {
         return "Error saving message to JSON file.";
     }
     }
+}
