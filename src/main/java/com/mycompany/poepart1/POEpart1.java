@@ -1,6 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
+
 
 package com.mycompany.poepart1; 
 
@@ -86,7 +84,7 @@ public class POEpart1 {
                         System.out.print("Enter Message Text: ");
                         String text = scanner.nextLine();
 
-                        Message msg = new Message(recipient, text, i);
+                     Message msg = new Message(recipient,text,i);
 
                         // Validate cell format
                         String cellCheck = msg.checkRecipientCell(recipient);
@@ -115,23 +113,24 @@ public class POEpart1 {
                             System.out.println("\n--- Message Details ---");
                             System.out.println(msg.printMessages());
                         }
+                        
+                        if(action == 3){
+                            msg.storeMessage();
+                        }
+                        }
                     }
 
-                    Message tracker = new Message();
+                    Message tracker = new Message("recipient","text",10);
+                    
                     System.out.println("\nTotal messages sent so far: " + tracker.returnTotalMessagess());
 
-                } else if (option == 2) {
-                    System.out.println("Coming Soon.");
-                } else if (option == 3) {
-                    System.out.println("Thank you for using QuickChat. Goodbye!");
-                } else {
-                    System.out.println("Invalid option. Please try again.");
-                }
-            }
-        }
+                } 
 
         scanner.close();
+    
     }
+
+        }
     }
 }
 
