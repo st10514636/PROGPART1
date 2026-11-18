@@ -15,9 +15,9 @@ public class Message {
     
     //field
     public String messageID;
-    private String recipientCell;
-    private String messageText;
-    private int messageNumber;
+    String recipientCell;
+    String messageText;
+    int messageNumber;
     static int totalMessagesSent = 0;
     
    File myjson = new File("message.json");
@@ -32,8 +32,11 @@ public class Message {
 
     public String generateMessageID() {
         Random ran = new Random();
-        long number = 1000000000L + (long)(ran.nextDouble() * 9000000000L);
-        return String.valueOf(number);
+        String id = "";
+    for (int i = 0; i < 10; i++) {
+        id = id + ran.nextInt(10);
+    }
+    return id;
     }
 
     
@@ -112,29 +115,38 @@ public class Message {
    
     
     public String storeMessage() {
-        String jsonContent = "\n" +
+        String newEntry = " {\n" +
                 "  \"messageID\": \"" + this.messageID + "\",\n" +
                 "  \"messageHash\": \"" + createMessageHash() + "\",\n" +
                 "  \"recipientCell\": \"" + this.recipientCell + "\",\n" +
                 "  \"messageText\": \"" + this.messageText + "\",\n" +
                 "  \"messageNumber\": " + this.messageNumber + "\n" +
-                "";
+                "}";
 
-        try (FileWriter file = new FileWriter(myjson, true)) {
-            file.write(jsonContent + "\n");
-            file.flush();
-            return "Message successfully stored.";
-        } catch (IOException e) {
-            return "Error saving message to JSON file.";
-}
-       
-    
-    
-}
+       try {
+        String existingContent = "";
+        if (myjson.exists() && myjson.length() > 0) {
+            Scanner reader = new Scanner(myjson);
+            while (reader.hasNextLine()) {
+                existingContent += reader.nextLine() + "\n";
+            }
 
+            reader.close();
+            existingContent = existingContent.trim();
+            if (existingContent.endsWith("]")) {
+                existingContent = existingContent.substring(0, existingContent.length() - 1).trim();
+            }
+        }
 
- 
-}
-    
-
-
+        FileWriter file = new FileWriter(myjson);
+        if (existingContent.isEmpty() || existingContent.equals("[")) {
+            file.write("[\n" + newEntry + "\n]");
+        } else {
+            file.write(existingContent + ",\n" + newEntry + "\n]");
+        }
+        file.close();
+        return "Message successfully stored.";
+    } catch (IOException e) {
+        return "Error saving message to JSON file.";
+    }
+    }
