@@ -23,7 +23,6 @@ public class Message {
         this.messageID = generateMessageID();
     }
 
-    // Generate a random 10-digit Message ID
     public String generateMessageID() {
         Random ran = new Random();
         long number = 1000000000L + (long)(ran.nextDouble() * 9000000000L);
