@@ -1,26 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.poepart1;
-import java.util.Random;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.File;
+import java.util.*;
+
+
 /**
  *
  * @author Student
  */
-public final class Message {
-   String messageID;
-    String recipientCell;
-    String messageText;
-    int messageNumber;
+public class Message {
+    
+    //field
+    public String messageID;
+    private String recipientCell;
+    private String messageText;
+    private int messageNumber;
     static int totalMessagesSent = 0;
     
-    public Message() {}
+   File myjson = new File("message.json");
+   
+   
     public Message(String recipientCell, String messageText, int messageNumber) {
         this.recipientCell = recipientCell;
         this.messageText = messageText;
@@ -40,7 +42,7 @@ public final class Message {
     }
 
     public String checkRecipientCell(String cellNumber) {
-        if (cellNumber == null || cellNumber.length() > 10 || cellNumber.length() < 2 || cellNumber.charAt(0) != '+') {
+        if (cellNumber == null || cellNumber.length() > 12 || cellNumber.length() < 2 || cellNumber.charAt(0) != '+') {
             return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
         }
 
@@ -107,8 +109,32 @@ public final class Message {
     }
 
     // Research placeholder method for JSON storage requirement
+   
+    
     public String storeMessage() {
-        return "JSON storage feature researched and ready for implementation.";
-    }
+        String jsonContent = "\n" +
+                "  \"messageID\": \"" + this.messageID + "\",\n" +
+                "  \"messageHash\": \"" + createMessageHash() + "\",\n" +
+                "  \"recipientCell\": \"" + this.recipientCell + "\",\n" +
+                "  \"messageText\": \"" + this.messageText + "\",\n" +
+                "  \"messageNumber\": " + this.messageNumber + "\n" +
+                "";
+
+        try (FileWriter file = new FileWriter(myjson, true)) {
+            file.write(jsonContent + "\n");
+            file.flush();
+            return "Message successfully stored.";
+        } catch (IOException e) {
+            return "Error saving message to JSON file.";
 }
+       
+    
+    
+}
+
+
+ 
+}
+    
+
 
