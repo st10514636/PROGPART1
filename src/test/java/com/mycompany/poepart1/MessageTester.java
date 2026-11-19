@@ -17,7 +17,11 @@ public class MessageTester {
    
     @Test
     public void testCheckMessageLengthSuccess() {
-        Message msg = new Message();
+        String recipient = "";
+        String text = "";
+        int i = 0;
+        
+       Message msg = new Message(recipient,text,i);                    
         String actual = msg.checkMessageLength("Hi Mike, can you join us for dinner tonight?");
         assertEquals("Message ready to send.", actual);
     }
@@ -25,7 +29,11 @@ public class MessageTester {
     // 2. Test message length failure (> 250 chars)
     @Test
     public void testCheckMessageLengthFailure() {
-        Message msg = new Message();
+         String recipient = "";
+        String text = "";
+        int i = 0;
+        
+        Message msg = new Message(recipient,text,i);   
         String longMessage = "A".repeat(260);
         String actual = msg.checkMessageLength(longMessage);
         assertEquals("Message exceeds 250 characters by 10; please reduce the size.", actual);
@@ -34,7 +42,10 @@ public class MessageTester {
     // 3. Test recipient cell number success
     @Test
     public void testCheckRecipientCellSuccess() {
-        Message msg = new Message();
+        String recipient = "";
+        String text = "";
+        int i = 0;
+        Message msg = new Message(recipient,text,i);   
         String actual = msg.checkRecipientCell("+27718693002");
         assertEquals("Cell phone number successfully captured.", actual);
     }
@@ -42,8 +53,11 @@ public class MessageTester {
     // 4. Test recipient cell number failure
     @Test
     public void testCheckRecipientCellFailure() {
-        Message msg = new Message();
-        String actual = msg.checkRecipientCell("08575975889");
+        String recipient = "";
+        String text = "";
+        int i = 0;
+        Message msg = new Message(recipient,text,i);   
+        String actual = msg.checkRecipientCell("0685398441");
         assertEquals("Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.", actual);
     }
 
@@ -59,7 +73,10 @@ public class MessageTester {
     // 6. Test message ID length validation
     @Test
     public void testCheckMessageID() {
-        Message msg = new Message();
+        String recipient = "";
+        String text = "";
+        int i = 0;
+        Message msg = new Message(recipient,text,i);   
         msg.messageID = "1234567890";
         assertTrue(msg.checkMessageID());
     }
@@ -67,7 +84,10 @@ public class MessageTester {
     // 7. Test user selection - Send Message
     @Test
     public void testSentMessageSend() {
-        Message msg = new Message();
+        String recipient = "";
+        String text = "";
+        int i = 0;
+         Message msg = new Message(recipient,text,i);   
         String actual = msg.SentMessage(1);
         assertEquals("Message successfully sent.", actual);
     }
@@ -75,15 +95,66 @@ public class MessageTester {
     // 8. Test user selection - Disregard Message
     @Test
     public void testSentMessageDisregard() {
-        Message msg = new Message();
+        String recipient = "";
+        String text = "";
+        int i = 0;
+        Message msg = new Message(recipient,text,i);   
         String actual = msg.SentMessage(2);
         assertEquals("Press 0 to delete the message.", actual);
     }
     @Test
     public void testSentMessageStore() {
-        Message msg = new Message();
+        String recipient = "";
+        String text = "";
+        int i = 0;
+        Message msg = new Message(recipient,text,i);   
         String actual = msg.SentMessage(3);
         assertEquals("Message successfully stored.", actual);
     }
+    @Test
+    public void testStoreMessageJSON() {
+        Message msg = new Message("+27685398441", "Hi Mike, dinner tonight?", 1);
+        msg.messageID = "0012345678";
+        String actual = msg.storeMessage();
+        assertEquals("Message successfully stored.", actual);
+    }
+    public class LoginTest {
+
+    // 1. Success Test: All fields meet requirements
+    @Test
+    public void testRegisterUserSuccess() {
+        Login login = new Login();
+        String expected = "Cell number successfully captured.";
+        String actual = login.registerUser("Kyl_1", "Ch&&sec@ke99!", "+27838968976", "Nomthandazo", "Nhlapo");
+        assertEquals(expected, actual);
+    }
+
+    // 2. Failure Test: Username missing underscore or longer than 5 characters
+    @Test
+    public void testRegisterUserInvalidUsername() {
+        Login login = new Login();
+        String expected = "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
+        String actual = login.registerUser("kyle!!!!!!", "Ch&&sec@ke99!", "+27838968976", "Nomthandazo", "Nhlapo");
+        assertEquals(expected, actual);
+    }
+
+    // 3. Failure Test: Password fails complexity requirements (no upper, digit, or special character)
+    @Test
+    public void testRegisterUserInvalidPassword() {
+        Login login = new Login();
+        String expected = "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
+        String actual = login.registerUser("Kyl_1", "password", "+27838968976", "Nomthandazo", "Nhlapo");
+        assertEquals(expected, actual);
+    }
+
+    // 4. Failure Test: Cell phone number missing '+' international prefix or invalid length
+    @Test
+    public void testRegisterUserInvalidCellNumber() {
+        Login login = new Login();
+        String expected = "Cell number is incorrectly formatted or does not contain an international code; please correct the number and try again.";
+        String actual = login.registerUser("Kyl_1", "Ch&&sec@ke99!", "08966553", "Nomthandazo", "Nhlapo");
+        assertEquals(expected, actual);
+    }
+}
     
 }
