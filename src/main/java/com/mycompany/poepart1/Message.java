@@ -252,6 +252,86 @@ public class Message {
         }
         return value;
     }
+}
+public String displaySendersAndRecipients() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < totalTrackedCount; i++) {
+            sb.append((i + 1) + ". Sender: " + allSenders[i]
+                    + " | Recipient: " + allRecipients[i] + "\n");
+        }
+        return sb.length() > 0 ? sb.toString().trim() : "No messages recorded.";
+    }
 
+    public String getLongestMessage() {
+        if (totalTrackedCount == 0) {
+            return "No messages available.";
+        }
+        int longestIndex = 0;
+        for (int i = 1; i < totalTrackedCount; i++) {
+            if (allMessages[i] != null && allMessages[i].length() > allMessages[longestIndex].length()) {
+                longestIndex = i;
+            }
+        }
+        return "Message ID: " + messageIDs[longestIndex]
+                + "\nRecipient: " + allRecipients[longestIndex]
+                + "\nMessage (" + allMessages[longestIndex].length() + " chars): " + allMessages[longestIndex];
+    }
+
+    public String searchByMessageID(String targetID) {
+        for (int i = 0; i < totalTrackedCount; i++) {
+            if (messageIDs[i] != null && messageIDs[i].equalsIgnoreCase(targetID)) {
+                return "Found Message:\nID: " + messageIDs[i]
+                        + "\nHash: " + messageHashes[i]
+                        + "\nRecipient: " + allRecipients[i]
+                        + "\nMessage: " + allMessages[i];
+            }
+        }
+        return "Message ID not found: " + targetID;
+    }
+
+    public String searchByRecipient(String targetRecipient) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < totalTrackedCount; i++) {
+            if (allRecipients[i] != null && allRecipients[i].equalsIgnoreCase(targetRecipient)) {
+                sb.append("ID: " + messageIDs[i]
+                        + " | Message: " + allMessages[i] + "\n");
+            }
+        }
+        return sb.length() > 0 ? sb.toString().trim() : "No messages found for recipient: " + targetRecipient;
+    }
+
+    public String deleteByMessageHash(String targetHash) {
+        for (int i = 0; i < totalTrackedCount; i++) {
+            if (messageHashes[i] != null && messageHashes[i].equalsIgnoreCase(targetHash)) {
+                String deletedText = allMessages[i];
+                for (int j = i; j < totalTrackedCount - 1; j++) {
+                    messageHashes[j] = messageHashes[j + 1];
+                    messageIDs[j] = messageIDs[j + 1];
+                    allMessages[j] = allMessages[j + 1];
+                    allRecipients[j] = allRecipients[j + 1];
+                    allSenders[j] = allSenders[j + 1];
+                }
+                totalTrackedCount--;
+                return "Deleted message: \"" + deletedText + "\"";
+            }
+        }
+        return "No message found with hash: " + targetHash;
+    }
+
+    public String displaySentReport() {
+        if (sentCount == 0) {
+            return "No sent messages to report.";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < sentCount; i++) {
+            sb.append((i + 1) + ") ID: " + sentIDs[i]
+                    + " | Hash: " + sentHashes[i]
+                    + " | To: " + sentRecipients[i]
+                    + " | Msg: " + sentMessages[i] + "\n");
+        }
+        return sb.toString().trim();
+    }
 } 
+}
+
 
