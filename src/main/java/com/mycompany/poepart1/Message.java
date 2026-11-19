@@ -207,4 +207,51 @@ public class Message {
         return "Error saving message to JSON file.";
     }
     }
-}
+    public void readJSONIntoStoredArray() {
+        try {
+            if (!myjson.exists()) {
+                return;
+            }
+            Scanner fileReader = new Scanner(myjson);
+            storedCount = 0;
+
+            String id = "", hash = "", recipient = "", text = "";
+
+            while (fileReader.hasNextLine()) {
+                String line = fileReader.nextLine().trim();
+                if (line.startsWith("\"messageID\":")) {
+                    id = extractJsonValue(line);
+                } else if (line.startsWith("\"messageHash\":")) {
+                    hash = extractJsonValue(line);
+                } else if (line.startsWith("\"recipientCell\":")) {
+                    recipient = extractJsonValue(line);
+                } else if (line.startsWith("\"messageText\":")) {
+                    text = extractJsonValue(line);
+                    storedIDs[storedCount] = id;
+                    storedHashes[storedCount] = hash;
+                    storedSenders[storedCount] = this.senderName;
+                    storedRecipients[storedCount] = recipient;
+                    storedMessages[storedCount] = text;
+                    storedCount++;
+                }
+            }
+            fileReader.close();
+        } catch (Exception e) {
+            System.out.println("Could not read JSON file: " + e.getMessage());
+        }
+    }
+
+    public String extractJsonValue(String line) {
+        int colonIndex = line.indexOf(":");
+        String value = line.substring(colonIndex + 1).trim();
+        if (value.endsWith(",")) {
+            value = value.substring(0, value.length() - 1);
+        }
+        if (value.startsWith("\"") && value.endsWith("\"")) {
+            value = value.substring(1, value.length() - 1);
+        }
+        return value;
+    }
+
+} // Final closing brace of public class Message
+
