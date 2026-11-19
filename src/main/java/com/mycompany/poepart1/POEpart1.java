@@ -114,12 +114,55 @@ public class POEpart1 {
                             System.out.println("\n--- Message Details ---");
                             System.out.println(msg.printMessages());
                         }
+                      
                         
                         if(action == 3){
                             msg.storeMessage();
                         }
                         }
                     }
+                else if (option == 4) {
+            Message tracker = new Message();
+            System.out.println("\n=== STORED MESSAGES & REPORTS ===");
+            System.out.println("a) Display sender and recipient of all stored messages");
+            System.out.println("b) Display the longest message");
+            System.out.println("c) Search for a message ID");
+            System.out.println("d) Search for all messages for a particular recipient");
+            System.out.println("e) Delete a message using the message hash");
+            System.out.println("f) Display full report of all sent messages");
+            System.out.print("Select an option (a-f): ");
+            String subOption = scanner.nextLine().trim().toLowerCase();
+
+            switch (subOption) {
+                case "a":
+                    System.out.println("\n" + tracker.displaySendersAndRecipients());
+                    break;
+                case "b":
+                    System.out.println("\nLongest Message:\n" + tracker.getLongestMessage());
+                    break;
+                case "c":
+                    System.out.print("Enter Message ID to search: ");
+                    String searchID = scanner.nextLine().trim();
+                    System.out.println("\n" + tracker.searchByMessageID(searchID));
+                    break;
+                case "d":
+                    System.out.print("Enter recipient number to search: ");
+                    String searchRecipient = scanner.nextLine().trim();
+                    System.out.println("\n" + tracker.searchByRecipient(searchRecipient));
+                    break;
+                case "e":
+                    System.out.print("Enter message hash to delete: ");
+                    String targetHash = scanner.nextLine().trim();
+                    System.out.println("\n" + tracker.deleteByMessageHash(targetHash));
+                    break;
+                case "f":
+                    System.out.println("\n" + tracker.displaySentReport());
+                    break;
+                default:
+                    System.out.println("Invalid sub-option.");
+                    break;
+            }
+        }
 
                     Message tracker = new Message("recipient","text",10);
                     
