@@ -253,5 +253,5 @@ public class Message {
         return value;
     }
 
-} // Final closing brace of public class Message
+} 
 
